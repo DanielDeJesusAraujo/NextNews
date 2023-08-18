@@ -46,7 +46,9 @@ export default function News() {
   }, [filters])
   
 
-  const handleNews = ({target: {value, name}}: {target: {value: string, name: string}}) => {
+  const handleNews = (
+    {target: {value, name}}: {target: {value: string, name: string}}
+    ) => {
     setfilters({...filters, [name]: value})
   }
 

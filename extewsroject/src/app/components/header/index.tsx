@@ -2,7 +2,7 @@
 import React from 'react'
 import styles from './page.module.css'
 
-function Header({handleNews}: () => void) {
+function Header({handleNews}: {handleNews: ({ target: { value, name } }: { target: { value: string; name: string; }; }) => void}) {
   const newsCategories = [
     "Politic",
     "Technology",
