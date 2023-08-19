@@ -38,17 +38,17 @@ export default function News() {
     return (
       <main className={styles.news}>
         <Header handleNews={handleNews}/>
-        {/* {news.articles.map((article) => (
+        {news.articles.map((article) => (
           <article className={styles.article} key={article.url}>
             <h2>{article.title}</h2>
             <img src={article.urlToImage} alt={article.title} width={500} height={300} />
             <p>{article.description}</p>
           </article>
-        ))} */}
+        ))}
       </main>
     )
   }
-
+  
   return (
     <main>loading...</main>
   )
