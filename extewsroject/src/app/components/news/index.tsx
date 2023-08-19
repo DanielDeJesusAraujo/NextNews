@@ -14,6 +14,11 @@ export default function News() {
     country: 'us',
     category: 'General',
   })
+
+  useEffect(() => {
+    console.log(news)
+  }, [news])
+  
   
   useEffect(() => {
     const get = async () => {
@@ -35,8 +40,9 @@ export default function News() {
   }, [])
 
   const getNews = async ({ country, category }: { country?: string, category?: string }): Promise<IApiResponse> => {
-    const news = await fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${'994d196c82444a109712477579373004'}`)
+    const news = await fetch(`https://gnews.io/api/v4/search?q=example&lang=en&country=us&max=10&apikey=${'e996e4fad4042c43cacd7a7657986feb'}`)
     const data = await news.json();
+    console.log(data)
     return data;
   }
   
@@ -52,7 +58,7 @@ export default function News() {
       {(news && news.articles) ? (news.articles.map((article) => (
         <article className={styles.article} key={article.url}>
           <h2>{article.title}</h2>
-          <img src={article.urlToImage} alt={article.title} width={500} height={300} />
+          <img src={article.image} alt={article.title} width={500} height={300} />
           <p>{article.description}</p>
         </article>
       ))): <p>Loading...</p>}
