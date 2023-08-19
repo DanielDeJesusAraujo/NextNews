@@ -14,11 +14,11 @@ const getNews = async ({ country, category }: { country?: string, category?: str
 
 
 export default function News() {
+  const [news, setnews] = useState<IApiResponse>()
   const [filters, setfilters] = useState({
     country: 'us',
     category: 'General',
   })
-  const [news, setnews] = useState<IApiResponse>()
 
   useEffect(() => {
     const get = async () => {
@@ -27,6 +27,20 @@ export default function News() {
     }
     get()
   }, [filters])
+
+  useEffect(() => {
+    const get = async () => {
+      const res = await getNews({
+        country: 'us',
+        category: 'General',
+      })
+      setnews(res)
+    }
+    get()
+  }, [])
+  
+
+
 
   const handleNews = (
     { target: { value, name } }: { target: { value: string, name: string } }
