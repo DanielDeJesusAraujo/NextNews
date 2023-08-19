@@ -48,8 +48,4 @@ export default function News() {
       </main>
     )
   }
-  
-  return (
-    <main>loading...</main>
-  )
 }
