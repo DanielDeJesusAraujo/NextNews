@@ -4,14 +4,13 @@ import styles from './page.module.css'
 
 function Header({handleNews}: {handleNews: ({ target: { value, name } }: { target: { value: string; name: string; }; }) => void}) {
   const newsCategories = [
-    "Politic",
+    "General",
     "Technology",
     "Sports",
     "Entertainment",
     "Health",
     "Science",
     "Business",
-    "General",
   ];
 
   const countrys = [

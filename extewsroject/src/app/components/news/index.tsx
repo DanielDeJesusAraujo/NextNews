@@ -5,20 +5,9 @@ import IApiResponse from '../../interfaces/Inews'
 import Header from '../header';
 import { useEffect, useState } from 'react';
 
-const newsCategories = [
-  "Politics",
-  "Technology",
-  "Sports",
-  "Entertainment",
-  "Health",
-  "Science",
-  "Business",
-  "General",
-];
-
 
 const getNews = async ({country, category}: {country?: string, category?: string}): Promise<IApiResponse> => {
-  const news = await fetch(`https://newsapi.org/v2/top-headlines?country=${country || 'us'}&category=${category || newsCategories[1]}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY || '994d196c82444a109712477579373004'}`)
+  const news = await fetch(`https://newsapi.org/v2/top-headlines?country=${country || 'us'}&category=${category || 'General'}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`)
   const data = await news.json()
   return data
 }
@@ -28,7 +17,7 @@ const getNews = async ({country, category}: {country?: string, category?: string
 export default function News() {
   const [filters, setfilters] = useState({
     country: 'us',
-    category: newsCategories[1],
+    category: 'General',
   })
   const [news, setnews] = useState<IApiResponse>()
 
@@ -53,16 +42,21 @@ export default function News() {
   }
 
 
+  if (news?.totalResults) {
+    return (
+      <main className={styles.news}>
+        <Header handleNews={handleNews}/>
+        {news.articles.map((article) => (
+          <article className={styles.article} key={article.url}>
+            <h2>{article.title}</h2>
+            <img src={article.urlToImage} alt={article.title} width={500} height={300} />
+            <p>{article.description}</p>
+          </article>
+        ))}
+      </main>
+    )
+  }
   return (
-    <main className={styles.news}>
-      <Header handleNews={handleNews}/>
-      {news && news.articles.map((article) => (
-        <article className={styles.article} key={article.url}>
-          <h2>{article.title}</h2>
-          <img src={article.urlToImage} alt={article.title} width={500} height={300} />
-          <p>{article.description}</p>
-        </article>
-      ))}
-    </main>
+    <main></main>
   )
 }
