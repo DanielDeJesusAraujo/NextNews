@@ -5,11 +5,6 @@ import IApiResponse from '../../interfaces/Inews'
 import Header from '../header';
 import { useEffect, useState } from 'react';
 
-const getNews = async ({ country, category }: { country?: string, category?: string }): Promise<IApiResponse> => {
-  const news = await fetch(`https://newsapi.org/v2/top-headlines?country=${country || 'us'}&category=${category || 'General'}&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY || '994d196c82444a109712477579373004'}`)
-  const data = await news.json()
-  return data
-}
 
 
 
@@ -19,7 +14,7 @@ export default function News() {
     country: 'us',
     category: 'General',
   })
-
+  
   useEffect(() => {
     const get = async () => {
       const res = await getNews(filters)
@@ -27,7 +22,7 @@ export default function News() {
     }
     get()
   }, [filters])
-
+  
   useEffect(() => {
     const get = async () => {
       const res = await getNews({
@@ -38,10 +33,13 @@ export default function News() {
     }
     get()
   }, [])
+
+  const getNews = async ({ country, category }: { country?: string, category?: string }): Promise<IApiResponse> => {
+    const news = await fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${'994d196c82444a109712477579373004'}`)
+    const data = await news.json()
+    return data
+  }
   
-
-
-
   const handleNews = (
     { target: { value, name } }: { target: { value: string, name: string } }
   ) => {
