@@ -36,8 +36,8 @@ export default function News() {
 
   const getNews = async ({ country, category }: { country?: string, category?: string }): Promise<IApiResponse> => {
     const news = await fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${'994d196c82444a109712477579373004'}`)
-    const data = await news.json()
-    return data
+    const data = await news.json();
+    return data;
   }
   
   const handleNews = (
